@@ -1,0 +1,429 @@
+/*
+  Borozdov Gallery — an Obsidian theme from the Borozdov collection.
+  Two faces: Midnight (dark, a black stage) and Studio (light, a white
+  gallery). Quiet neutrals, one precise blue, system type.
+  https://github.com/borozdov-obsidian-themes/gallery
+
+  License: MIT (this file). No fonts are embedded: the theme uses each
+  platform's own system typeface.
+*/
+
+/* ===== 1. PALETTE =====
+   Only these values differ by face. Everything below is written once,
+   against var(--role), and resolves correctly either way. */
+
+.theme-dark {
+  color-scheme: dark;
+
+  --canvas: #000;
+  --inset: #0e0e0e;
+  --surface: #1d1d1f;
+  --hover: #2c2c2e;
+  --hairline: #333336;
+  --strong: #6e6e73;
+  --slate: #86868b;
+  --tertiary: #6e6e73;
+  --soft: #d2d2d7;
+  --ink: #f5f5f7;
+  --accent: #2997ff;
+  --accent-fill: #0071e3;
+  --accent-fill-hover: #0077ed;
+  --accent-veil: rgb(41 151 255 / 30%);
+  --mark: rgb(255 214 10 / 32%);
+  --scrim: rgb(0 0 0 / 60%);
+
+  /* Obsidian derives parts of its UI from these components directly. */
+  --accent-h: 211;
+  --accent-s: 100%;
+  --accent-l: 58%;
+
+  /* System colors, dark variants: callouts and canvas cards read them. */
+  --color-red: #ff453a;
+  --color-orange: #ff9f0a;
+  --color-yellow: #ffd60a;
+  --color-green: #30d158;
+  --color-cyan: #64d2ff;
+  --color-blue: #0a84ff;
+  --color-purple: #bf5af2;
+  --color-pink: #ff375f;
+  --color-red-rgb: 255, 69, 58;
+  --color-orange-rgb: 255, 159, 10;
+  --color-yellow-rgb: 255, 214, 10;
+  --color-green-rgb: 48, 209, 88;
+  --color-cyan-rgb: 100, 210, 255;
+  --color-blue-rgb: 10, 132, 255;
+  --color-purple-rgb: 191, 90, 242;
+  --color-pink-rgb: 255, 55, 95;
+  --callout-quote: #98989d;
+
+  /* Code: a dark editor palette with distinct hues per token kind. */
+  --code-comment: #7f8c98;
+  --code-function: #67b7a4;
+  --code-keyword: #ff7ab2;
+  --code-operator: #d2d2d7;
+  --code-property: #6bdfff;
+  --code-punctuation: #a1a1a6;
+  --code-string: #ff8170;
+  --code-tag: #ff7ab2;
+  --code-value: #d9c97c;
+  --code-important: #ff9f0a;
+}
+
+.theme-light {
+  color-scheme: light;
+
+  --canvas: #fff;
+  --inset: #f5f5f7;
+  --surface: #f5f5f7;
+  --hover: #e8e8ed;
+  --hairline: #e6e6e8;
+  --strong: #86868b;
+  --slate: #6e6e73;
+  --tertiary: #86868b;
+  --soft: #424245;
+  --ink: #1d1d1f;
+  --accent: #06c;
+  --accent-fill: #0071e3;
+  --accent-fill-hover: #0077ed;
+  --accent-veil: rgb(0 113 227 / 18%);
+  --mark: rgb(255 204 0 / 38%);
+  --scrim: rgb(0 0 0 / 30%);
+  --accent-h: 211;
+  --accent-s: 100%;
+  --accent-l: 45%;
+
+  /* System colors, light variants. */
+  --color-red: #ff3b30;
+  --color-orange: #ff9500;
+  --color-yellow: #fc0;
+  --color-green: #34c759;
+  --color-cyan: #32ade6;
+  --color-blue: #007aff;
+  --color-purple: #af52de;
+  --color-pink: #ff2d55;
+  --color-red-rgb: 255, 59, 48;
+  --color-orange-rgb: 255, 149, 0;
+  --color-yellow-rgb: 255, 204, 0;
+  --color-green-rgb: 52, 199, 89;
+  --color-cyan-rgb: 50, 173, 230;
+  --color-blue-rgb: 0, 122, 255;
+  --color-purple-rgb: 175, 82, 222;
+  --color-pink-rgb: 255, 45, 85;
+  --callout-quote: #8e8e93;
+  --code-comment: #707f8c;
+  --code-function: #3e8087;
+  --code-keyword: #ad3da4;
+  --code-operator: #424245;
+  --code-property: #0b4f79;
+  --code-punctuation: #6e6e73;
+  --code-string: #d12f1b;
+  --code-tag: #ad3da4;
+  --code-value: #272ad8;
+  --code-important: #c35900;
+}
+
+/* ===== 2. TYPE & SHAPE =====
+   The system stack renders SF Pro on Apple devices and Segoe UI or Roboto
+   elsewhere — nothing to embed, nothing to download. */
+
+body {
+  --font-interface-theme: -apple-system, "BlinkMacSystemFont", "SF Pro Text",
+    "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+  --font-text-theme: -apple-system, "BlinkMacSystemFont", "SF Pro Text",
+    "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+  --font-monospace-theme: "SF Mono", "SFMono-Regular", ui-monospace, "Menlo",
+    "Consolas", monospace;
+
+  /* Soft, generous corners: small controls at 6–10px, panels at 16–20px. */
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 16px;
+  --radius-xl: 20px;
+  --input-radius: 10px;
+  --button-radius: 980px;
+  --checkbox-radius: 50%;
+}
+
+/* Headlines are set tight and heavy, never in capitals. */
+body {
+  --h1-weight: 600; --h2-weight: 600; --h3-weight: 600;
+  --h4-weight: 600; --h5-weight: 600; --h6-weight: 600;
+  --h1-line-height: 1.15; --h2-line-height: 1.15; --h3-line-height: 1.2;
+  --h4-line-height: 1.25; --h5-line-height: 1.25; --h6-line-height: 1.25;
+  --h1-color: var(--ink); --h2-color: var(--ink); --h3-color: var(--ink);
+  --h4-color: var(--ink); --h5-color: var(--ink); --h6-color: var(--ink);
+}
+
+.markdown-rendered h1, .markdown-rendered h2,
+.markdown-source-view.mod-cm6 .cm-header-1,
+.markdown-source-view.mod-cm6 .cm-header-2,
+.inline-title {
+  letter-spacing: -0.02em;
+}
+
+.markdown-rendered h3, .markdown-rendered h4,
+.markdown-source-view.mod-cm6 .cm-header-3,
+.markdown-source-view.mod-cm6 .cm-header-4 {
+  letter-spacing: -0.01em;
+}
+
+/* ===== 3. BASE VARIABLE MAPPING =====
+   Obsidian re-declares most of these on .theme-dark / .theme-light, which
+   outranks a bare body rule; they're set at that level, where the theme,
+   loaded later, wins the tie. */
+
+.theme-dark,
+.theme-light {
+  --background-primary: var(--canvas);
+  --background-primary-alt: var(--inset);
+  --background-secondary: var(--surface);
+  --background-secondary-alt: var(--canvas);
+  --background-modifier-hover: var(--hover);
+  --background-modifier-active-hover: var(--hover);
+  --background-modifier-border: var(--hairline);
+  --background-modifier-border-hover: var(--strong);
+  --background-modifier-border-focus: var(--accent-fill);
+  --background-modifier-form-field: var(--inset);
+  --text-normal: var(--ink);
+  --text-muted: var(--slate);
+  --text-faint: var(--tertiary);
+  --text-accent: var(--accent);
+  --text-accent-hover: var(--accent);
+  --text-on-accent: #fff;
+  --text-on-accent-inverted: #fff;
+  --text-selection: var(--accent-veil);
+  --text-highlight-bg: var(--mark);
+  --color-accent: var(--accent-fill);
+  --color-accent-1: var(--accent-fill);
+  --color-accent-2: var(--accent-fill-hover);
+  --interactive-accent: var(--accent-fill);
+  --interactive-accent-hover: var(--accent-fill-hover);
+  --divider-color: var(--hairline);
+  --caret-color: var(--accent);
+  --tab-container-background: var(--surface);
+  --titlebar-background: var(--surface);
+  --titlebar-background-focused: var(--surface);
+  --ribbon-background: var(--surface);
+  --ribbon-background-collapsed: var(--canvas);
+  --status-bar-background: var(--surface);
+  --nav-item-background-hover: var(--hover);
+  --nav-item-background-selected: var(--hover);
+  --nav-item-color-selected: var(--ink);
+  --nav-indentation-guide-color: var(--hairline);
+}
+
+/* ===== 4. LINKS =====
+   Color carries the link; the underline appears only on hover. */
+
+body {
+  --link-color: var(--accent);
+  --link-color-hover: var(--accent);
+  --link-external-color: var(--accent);
+  --link-external-color-hover: var(--accent);
+  --link-decoration: none;
+  --link-decoration-hover: underline;
+  --link-external-decoration: none;
+  --link-external-decoration-hover: underline;
+  --link-unresolved-color: var(--accent);
+  --link-unresolved-opacity: 0.6;
+  --link-unresolved-decoration-style: dotted;
+}
+
+/* ===== 5. CALLOUTS =====
+   A quiet grey panel; only the title carries the type's system color. */
+
+body {
+  --callout-border-width: 0;
+  --callout-radius: 16px;
+  --callout-padding: 1rem 1.25rem;
+  --callout-title-weight: 600;
+  --callout-content-padding: 0.5rem 0 0;
+  --callout-blend-mode: normal;
+}
+
+.callout {
+  background-color: var(--surface);
+}
+
+.callout-content > :first-child { margin-top: 0; }
+.callout-content > :last-child { margin-bottom: 0; }
+
+/* ===== 6. CODE ===== */
+
+body {
+  --code-background: var(--inset);
+  --code-normal: var(--ink);
+  --code-radius: 8px;
+  --code-border-width: 0;
+}
+
+.markdown-rendered pre {
+  border-radius: 12px;
+}
+
+.token.keyword, .cm-keyword { font-weight: 600; }
+.token.comment, .cm-comment { font-style: italic; }
+
+/* ===== 7. BLOCKQUOTE ===== */
+
+body {
+  --blockquote-border-thickness: 3px;
+  --blockquote-border-color: var(--hairline);
+  --blockquote-color: var(--soft);
+  --blockquote-font-style: normal;
+}
+
+/* ===== 8. TAGS =====
+   An outlined capsule: transparent fill, a fine grey rim, ink on hover. */
+
+body {
+  --tag-size: 0.8em;
+  --tag-weight: 500;
+  --tag-radius: 980px;
+  --tag-padding-x: 0.65em;
+  --tag-padding-y: 0.2em;
+  --tag-border-width: 1px;
+  --tag-color: var(--soft);
+  --tag-color-hover: var(--ink);
+  --tag-background: transparent;
+  --tag-background-hover: transparent;
+  --tag-border-color: var(--strong);
+  --tag-border-color-hover: var(--ink);
+  --tag-decoration-hover: none;
+}
+
+/* ===== 9. TABLES =====
+   A rounded frame, a grey header, no zebra striping. */
+
+body {
+  --table-border-width: 1px;
+  --table-border-color: var(--hairline);
+  --table-header-background: var(--surface);
+  --table-header-background-hover: var(--hover);
+  --table-header-border-color: var(--hairline);
+  --table-header-weight: 600;
+  --table-header-color: var(--slate);
+  --table-row-background-hover: var(--surface);
+  --table-row-alt-background: transparent;
+  --table-row-alt-background-hover: var(--surface);
+}
+
+.markdown-rendered table {
+  border-radius: 12px;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* The outer frame belongs to the table, so it follows the rounded corners;
+   square cells drawing it would be clipped away at each corner. Cells draw
+   only the inner grid: an end and a bottom line, none on the outer edges. */
+.markdown-rendered table {
+  border: var(--table-border-width) solid var(--table-border-color);
+}
+
+.markdown-rendered th,
+.markdown-rendered td {
+  border-block-start-width: 0;
+  border-inline-start-width: 0;
+}
+
+.markdown-rendered tr > :last-child {
+  border-inline-end-width: 0;
+}
+
+.markdown-rendered table > :last-child > tr:last-child > * {
+  border-block-end-width: 0;
+}
+
+.markdown-rendered td, .markdown-rendered th {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== 10. FIELDS & PROPERTIES ===== */
+
+select.dropdown, input[type="text"], input[type="search"], input[type="number"],
+textarea {
+  /* background-color, not the `background` shorthand: the shorthand resets
+     the dropdown's own arrow image. */
+  background-color: var(--background-modifier-form-field);
+  border: 1px solid var(--background-modifier-border);
+}
+
+/* No focus ring while typing: the caret and the selection already show
+   where you are. Covers form fields and every contenteditable surface —
+   the note body, its title, table cells edited in place. */
+select.dropdown:focus, input:focus, textarea:focus,
+select.dropdown:focus-visible, input:focus-visible, textarea:focus-visible,
+[contenteditable]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* A property's key is a label, not a field. input.* matches the frame rule
+   above at (0,1,1), so the element prefix is needed to win it. */
+input.metadata-property-key-input {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+/* List properties other than tags use Obsidian's own pill variables. */
+body {
+  --pill-background: transparent;
+  --pill-background-hover: transparent;
+  --pill-border-color: var(--strong);
+  --pill-border-color-hover: var(--ink);
+  --pill-color: var(--soft);
+  --pill-color-hover: var(--ink);
+}
+
+/* ===== 11. SURFACES =====
+   Panels float on hairlines and soft corners; the modal backdrop blurs. */
+
+.modal-bg {
+  background-color: var(--scrim);
+  backdrop-filter: blur(12px);
+}
+
+/* Obsidian pads an embed only on the left, for an accent bar this theme
+   doesn't draw. Even padding all round, with room for the open-link icon. */
+body {
+  --embed-padding: var(--size-4-3) var(--size-4-8) var(--size-4-3) var(--size-4-4);
+  --embed-border-start: none;
+}
+
+.markdown-embed {
+  background-color: var(--surface);
+  border-radius: 16px;
+}
+
+/* A hover preview is already a panel: the embed inside it stays flat. */
+.popover.hover-popover > .markdown-embed {
+  background-color: transparent;
+  border-radius: 0;
+}
+
+hr, .cm-hr { border-color: var(--hairline); }
+
+/* ===== 12. MOBILE =====
+   The phone layout re-declares tag and field colors on .is-mobile.theme-*,
+   outranking the rules above; the same selectors bring them back. */
+
+.is-mobile.theme-dark,
+.is-mobile.theme-light {
+  --tag-background: transparent;
+  --background-modifier-form-field: var(--inset);
+  --background-modifier-hover: var(--hover);
+}
+
+/* ===== 13. REDUCED MOTION ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    --anim-duration-superfast: 0s;
+    --anim-duration-fast: 0s;
+    --anim-duration-moderate: 0s;
+    --anim-duration-slow: 0s;
+  }
+}
